@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Painel Admin | Controle de Vendas</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f4f7f9; }
+        .admin-container { max-width: 900px; margin: 40px auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { text-align: left; padding: 15px; border-bottom: 1px solid #eee; }
+        th { background: #f8f9fa; color: #333; font-weight: 600; }
+        .status-tag { background: #d4edda; color: #155724; padding: 5px 10px; border-radius: 6px; font-size: 12px; font-weight: bold; }
+        .erro-msg { color: #721c24; background: #f8d7da; padding: 15px; border-radius: 8px; text-align: center; font-weight: bold;}
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <h1>Dashboard Financeiro</h1>
+        <p>Vendas processadas em tempo real</p>
+        
+        <table id="tabela-vendas">
+            <thead>
+                <tr>
+                    <th>ID</th><th>Cliente</th><th>Produto</th><th>Valor</th><th>Data</th><th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td colspan="6" style="text-align: center;">Carregando banco de dados...</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        async function carregarVendas() {
+            const corpoTabela = document.querySelector('#tabela-vendas tbody');
+            try {
+                const response = await fetch('http://127.0.0.1:5000/api/admin/vendas');
+                const vendas = await response.json();
+                
+                if(vendas.length === 0) {
+                    corpoTabela.innerHTML = "<tr><td colspan='6' style='text-align: center;'>Nenhuma venda registrada ainda. Faça um teste no index.html!</td></tr>";
+                    return;
+                }
+
+                corpoTabela.innerHTML = "";
+                vendas.forEach(venda => {
+                    corpoTabela.innerHTML += `
+                        <tr>
+                            <td>#${venda.id}</td>
+                            <td>${venda.cliente}</td>
+                            <td>${venda.produto}</td>
+                            <td>R$ ${venda.valor.toFixed(2)}</td>
+                            <td>${venda.data}</td>
+                            <td><span class="status-tag">${venda.status}</span></td>
+                        </tr>
+                    `;
+                });
+            } catch (error) {
+                console.error("Falha ao carregar:", error);
+                corpoTabela.innerHTML = `<tr><td colspan='6'><div class="erro-msg">❌ ERRO: O Servidor Python (app.py) não está rodando. Inicie-o no terminal primeiro!</div></td></tr>`;
+            }
+        }
+
+        carregarVendas();
+    </script>
+</body>
+</html>

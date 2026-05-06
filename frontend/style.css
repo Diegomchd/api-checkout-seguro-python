@@ -1,0 +1,89 @@
+/* Importando uma fonte moderna e profissional */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+:root {
+    --primary-color: #0056ff; /* Azul Nuvemshop */
+    --bg-color: #f4f7f9;
+    --card-bg: #ffffff;
+    --text-main: #1a1f36;
+    --text-muted: #4f566b;
+    --border-color: #e3e8ee;
+    --success-color: #24b47e;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.checkout-card {
+    background: var(--card-bg);
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 15px 35px rgba(50, 50, 93, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+h1 {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.subtitle {
+    color: var(--text-muted);
+    font-size: 14px;
+    margin-bottom: 30px;
+}
+
+.product-info {
+    background: var(--bg-color);
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.price {
+    font-weight: 700;
+    color: var(--primary-color);
+    font-size: 18px;
+}
+
+.btn-pay {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 16px 24px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 8px;
+    width: 100%;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn-pay:hover {
+    background-color: #0044cc;
+    transform: translateY(-1px);
+    box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1);
+}
+
+.btn-pay:active {
+    transform: translateY(1px);
+}
